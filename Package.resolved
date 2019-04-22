@@ -47,12 +47,30 @@
         }
       },
       {
+        "package": "MongoSwift",
+        "repositoryURL": "https://github.com/mongodb/mongo-swift-driver.git",
+        "state": {
+          "branch": null,
+          "revision": "11a8870f35ac5717057a228f029d31f4481bab6f",
+          "version": "0.0.9"
+        }
+      },
+      {
         "package": "Multipart",
         "repositoryURL": "https://github.com/vapor/multipart.git",
         "state": {
           "branch": null,
           "revision": "f919a01c4d10a281d6236a21b0b1d1759a72b8eb",
           "version": "3.0.4"
+        }
+      },
+      {
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble.git",
+        "state": {
+          "branch": null,
+          "revision": "e9d769113660769a4d9dd3afb855562c0b7ae7b0",
+          "version": "7.3.4"
         }
       },
       {
@@ -71,6 +89,24 @@
           "branch": null,
           "revision": "fa5b5de62bd68bcde9a69933f31319e46c7275fb",
           "version": "1.0.2"
+        }
+      },
+      {
+        "package": "bson",
+        "repositoryURL": "https://github.com/mongodb/swift-bson",
+        "state": {
+          "branch": null,
+          "revision": "40f770ed265bb9958edbcd0c809a3c2afe75a3ba",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "mongoc",
+        "repositoryURL": "https://github.com/mongodb/swift-mongoc",
+        "state": {
+          "branch": null,
+          "revision": "e503b50210dae2cf0220474c2f12087830150e9f",
+          "version": "2.0.0"
         }
       },
       {

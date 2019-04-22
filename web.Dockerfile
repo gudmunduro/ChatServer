@@ -7,7 +7,18 @@ ARG env
 
 RUN apt-get -qq update && apt-get -q -y install \
   tzdata \
+  git cmake libssl-dev libsasl2-dev \
   && rm -r /var/lib/apt/lists/*
+
+# Compiling latest libmongoc and libbson
+RUN git clone -b r1.13 https://github.com/mongodb/mongo-c-driver /tmp/libmongoc
+WORKDIR /tmp/libmongoc
+RUN cmake \
+  -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+  -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF \
+  -DCMAKE_BUILD_TYPE=Release
+RUN make -j8 install
+
 WORKDIR /app
 COPY . .
 RUN mkdir -p /build/lib && cp -R /usr/lib/swift/linux/*.so /build/lib
@@ -19,7 +30,18 @@ ARG env
 RUN apt-get -qq update && apt-get install -y \
   libicu55 libxml2 libbsd0 libcurl3 libatomic1 \
   tzdata \
+  git cmake libssl-dev libsasl2-dev \
   && rm -r /var/lib/apt/lists/*
+
+# Compiling latest libmongoc and libbson
+RUN git clone -b r1.13 https://github.com/mongodb/mongo-c-driver /tmp/libmongoc
+WORKDIR /tmp/libmongoc
+RUN cmake \
+  -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+  -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF \
+  -DCMAKE_BUILD_TYPE=Release
+RUN make -j8 install
+
 WORKDIR /app
 COPY --from=builder /build/bin/Run .
 COPY --from=builder /build/lib/* /usr/lib/
@@ -29,4 +51,5 @@ COPY --from=builder /build/lib/* /usr/lib/
 #COPY --from=builder /app/Resources ./Resources
 ENV ENVIRONMENT=$env
 
-ENTRYPOINT ./Run serve --env $ENVIRONMENT --hostname 0.0.0.0 --port 80
+EXPOSE 8080
+ENTRYPOINT ./Run serve --env $ENVIRONMENT --hostname 0.0.0.0 --port 8080
