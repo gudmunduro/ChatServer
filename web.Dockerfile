@@ -34,7 +34,7 @@ RUN apt-get -qq update && apt-get install -y \
   && rm -r /var/lib/apt/lists/*
 
 # Compiling latest libmongoc and libbson
-RUN git clone -b r1.13 https://github.com/mongodb/mongo-c-driver /tmp/libmongoc
+RUN git clone -b r1.13 https://github.com/mongodb/mongo-c-driver /tmp/libmongoc=
 WORKDIR /tmp/libmongoc
 RUN cmake \
   -DCMAKE_INSTALL_PREFIX:PATH=/usr \
