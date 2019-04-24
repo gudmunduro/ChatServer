@@ -8,4 +8,8 @@ final class ChatController {
         }
     }
 
+    func connect(_ ws: WebSocket, _ req: Request) {
+
+    }
+
 }
