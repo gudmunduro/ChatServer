@@ -1,6 +1,8 @@
 import Vapor
 import MongoKitten
 
+extension MongoKitten.Database: Service {}
+
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     // Register providers first
@@ -20,7 +22,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(middlewares)
 
     let connectionURI = "mongodb://localhost"
-    services.register { container -> MongoKitten.Database in
+    services.register(MongoKitten.Database.self) { container in
         return try MongoKitten.Database.lazyConnect(connectionURI, on: container.eventLoop)
     }
 
