@@ -3,19 +3,31 @@ import MongoKitten
 
 final class UserController {
 
-    func create(_ req: Request) {
-        return try req.content.decode(UserCreateRequst.self).map { userData in
+    func create(_ req: Request) throws -> Future<HTTPStatus> {
+        return try req.content.decode(UserCreateRequst.self).flatMap { userData throws -> Future<(MongoKitten.Database, UserCreateRequst)> in
             guard userData.password == userData.verifyPassword else {
-                throw Abort(.badRequst, reason: "Verify password invalid")
+                throw Abort(.badRequest, reason: "Verify password invalid")
             }
             return try req.make(Future<MongoKitten.Database>.self).and(result: userData)
-        }.flatMap(to: [User].self) { database, userData in 
-            return HTTPStatus.ok
+        }.flatMap { database, userData -> Future<InsertReply> in 
+            let users = database["users"]
+            return users.insert(["username": "test", "password": "ab123"])
+        }.map { _ -> HTTPStatus in
+            return .ok
         }
     }
 
-    func login() {
-
+    func login(_ req: Request) throws -> Future<User> {
+        return try req.make(Future<MongoKitten.Database>.self).flatMap { database -> Future<Document?> in
+            let users = database["users"]
+            return users.findOne("username" == "test")
+        }.map { user in
+            guard let u = user else {
+                throw Abort(.badRequest, reason: "Invalid username or password")
+            }
+            let decoder = BSONDecoder()
+            return try decoder.decode(User.self, from: u)
+        }
     }
 }
 
