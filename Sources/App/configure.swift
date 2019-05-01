@@ -21,7 +21,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
 
-    let connectionURI = "mongodb://localhost"
+    let connectionURI = "mongodb://localhost/chatapp"
     services.register(MongoKitten.Database.self) { container in
         return try MongoKitten.Database.lazyConnect(connectionURI, on: container.eventLoop)
     }
