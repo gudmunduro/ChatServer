@@ -13,14 +13,27 @@ extension Request {
         }
         let token = authHeader.token
 
-        return db["usertokens"].findOne("token" == token).flatMap { userToken in
-            return db["users"].findOne("_id" == (userToken?["userID"] as? String ?? ""))
-        }.map { user -> User in
-            guard let u = user else {
-                throw Abort(.badRequest, reason: "Invalid username or password")
+        return db["usertokens"].findOne("token" == token).flatMap { userToken -> Future<Document?> in
+
+            guard let userID = userToken?["userID"] as? ObjectId else {
+                throw Abort(.badRequest, reason: "User is not logged in(1)")
             }
-            let decoder = BSONDecoder()
-            return try decoder.decode(User.self, from: u)
+            
+            return db["users"].findOne("_id" == userID)
+        }.map { user -> User in
+            
+            guard let u = user else {
+                throw Abort(.badRequest, reason: "User is not logged in(2)")
+            }
+
+            do {
+                try User.from(u)
+            } catch {
+                print(error)
+            }
+            
+            
+            return try User.from(u)
         }
     }
 

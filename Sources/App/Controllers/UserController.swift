@@ -25,4 +25,9 @@ final class UserController {
         
         return try UserManager.login(db: db, username: authHeader.username, password: authHeader.password)
     }
+
+    func allUsers(_ req: Request) throws -> Future<[UserPublic]> {
+        let db = try req.mongoDB()
+        return try UserManager.allUsersPublicData(db: db)
+    }
 }
