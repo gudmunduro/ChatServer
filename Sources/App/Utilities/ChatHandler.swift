@@ -24,7 +24,7 @@ final class ChatHandler {
         print("Text sent", text)
         if text.first ?? " " == ":" {
             print("Text is command")
-            processCommand(String(text[...text.index(text.endIndex, offsetBy: -2)]), ws: ws)
+            processCommand(text, ws: ws)
         } else {
             globalChatRoom.insert(["message": text, "userID": user._id])
         }
@@ -32,19 +32,6 @@ final class ChatHandler {
 
     func processCommand(_ cmd: String, ws: WebSocket)
     {
-        print("Command: \(String(String(cmd.split(separator: " ")[0])))", terminator: "")
-        print("next print")
-        
-        let hpf = cmd.hasPrefix(":update")
-        let hsf = cmd.hasSuffix(":update")
-
-        print("cmdstart\(cmd)cmdend")
-        
-
-        print("Command starts with \(hpf)")
-        print("Command end swith \(hsf)")
-        
-        
         switch String(String(cmd.split(separator: " ")[0])) {
             case ":update":
                 print("command is update")
