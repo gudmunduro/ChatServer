@@ -10,7 +10,8 @@ final class ChatController {
 
     func connect(_ ws: WebSocket, _ req: Request) throws {
         let db = try req.mongoDB()
-        try req.requireAuthenticated(db).whenSuccess { user in            
+        let token = try req.parameters.next(String.self)
+        try req.requireAuthenticated(db, customToken: token).whenSuccess { user in            
             _ = ChatHandler(ws: ws, user: user, db: db)
         }
     }

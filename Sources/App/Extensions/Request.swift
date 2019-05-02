@@ -7,11 +7,11 @@ extension Request {
         return try make(MongoKitten.Database.self)
     }
 
-    func requireAuthenticated(_ db: MongoKitten.Database) throws -> Future<User> {
+    func requireAuthenticated(_ db: MongoKitten.Database, customToken: String = "") throws -> Future<User> {
         guard let authHeader = self.http.headers.bearerAuthorization else {
             throw Abort(.badRequest, reason: "User is not logged in")
         }
-        let token = authHeader.token
+        let token = (customToken == "") ? authHeader.token : customToken
 
         return db["usertokens"].findOne("token" == token).flatMap { userToken -> Future<Document?> in
 

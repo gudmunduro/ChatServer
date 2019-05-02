@@ -14,6 +14,6 @@ public func routes(_ router: Router, _ wssRouter: NIOWebSocketServer) throws {
 
     let chatController = ChatController()
 
-    wssRouter.get("connect", use: chatController.connect)
+    wssRouter.get("connect", String.parameter, use: chatController.connect)
 
 }
