@@ -26,10 +26,12 @@ final class UserController {
         return try UserManager.login(db: db, username: authHeader.username, password: authHeader.password)
     }
 
-    func testLogin(_ req: Request) throws -> Future<HTTPStatus> {
+    func testLogin(_ req: Request) throws -> Future<UserPublic> {
         let db = try req.mongoDB()
         
-        return try req.requireAuthenticated(db).map { _ in HTTPStatus.ok }
+        return try req.requireAuthenticated(db).map { user -> UserPublic in
+            return UserPublic(_id: user._id, username: user.username)
+        }
     } 
 
     func allUsers(_ req: Request) throws -> Future<[UserPublic]> {

@@ -1,0 +1,46 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/css/main.css">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/js/main.js"></script>
+        <title>Net chatapp</title>
+    </head>
+    <body>
+        <div class="sectionContainer">
+            <section id="left_userlist_wrapper">
+                <ul id="userlist">
+                    
+                </ul>
+            </section>
+
+            <main>
+                
+                <div id="mainHead">
+                    <h2 id="servername">Global Chat</h2>
+                </div>
+                
+
+                <section class="messages" id="messageBox">
+                    <b><span>HelgiSteinarr: </span><i>im a message</i></b>
+                </section>
+                <section class="sendbox">
+                    <input type="text" id="sendInput" placeholder="Message">
+                    <a id="sendButton">Send</a>
+                </section>
+            </main>
+    
+            <section id="right_userinfo">
+                <input type="text" name="username" id="username" placeholder="Username">
+                <input type="password" name="password" id="password" placeholder="Password">
+                <button id="loginButton">Login</button>
+            </section>
+        </div>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>

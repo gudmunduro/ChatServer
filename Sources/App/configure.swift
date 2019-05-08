@@ -1,4 +1,5 @@
 import Vapor
+import Leaf
 import MongoKitten
 
 extension MongoKitten.Database: Service {}
@@ -17,7 +18,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
 
     // Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
-    // middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
+    middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     let corsConfiguration = CORSMiddleware.Configuration(
         allowedOrigin: .all,
@@ -27,6 +28,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     let corsMiddleware = CORSMiddleware(configuration: corsConfiguration)
     middlewares.use(corsMiddleware)
     services.register(middlewares)
+
+    try services.register(LeafProvider())
+    config.prefer(LeafRenderer.self, for: ViewRenderer.self)
 
     let connectionURI = "mongodb://localhost/chatapp"
     services.register(MongoKitten.Database.self) { container in

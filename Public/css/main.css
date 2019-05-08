@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#mainHead {
+    display: block;
+    width: 100%;
+    height: 70px;
+}
+#mainHead h2#servername{
+    font-size: 60px;
+    background-color: rgb(25, 10, 92); 
+    color: transparent;
+    text-shadow: 4px 4px 5px #512DA8;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+         background-clip: text;
+    margin: 0;
+    padding: 0 5px 0 5px;
+}
+
+i{
+    font-size: 18px;
+    background-color: rgb(26, 166, 247); 
+    color: transparent;
+    text-shadow: 2px 2px 3px #512DA8;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+         background-clip: text;
+    margin: 0;
+    padding: 0 5px 0 5px;
+}
+span{
+    font-size: 20px;
+    background-color: rgb(8, 1, 63);
+    color: transparent;
+    text-shadow: 2px 2px 3px #512DA8;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+         background-clip: text;
+
+    font-style: italic;
+}
+
+.sectionContainer {
+    display: flex;
+    flex-flow: row-wrap;
+}
+
+section#left_userlist_wrapper {
+    background-color: #26204f;
+
+    display: block;
+    width: 20%;
+    height: 100vh;
+}
+
+section#right_userinfo {
+    background-color: #26204f;
+
+    display: block;
+    width: 20%;
+    height: 100vh;
+}
+
+main {
+    background-color: #512DA8;
+
+    display: block;
+    width: 60%;
+    height: 100vh;
+}
+
+main .messages {
+    display: block;
+    width: 100%;
+    height: calc(100% - 120px);
+}
+
+main .sendbox {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-flow: row;
+}
+
+main #sendInput {
+    margin: 10px;
+    width: calc(100% - 80px);
+    background-color: #E0E0E0;
+    border: 0 solid #E0E0E0;
+    border-radius: 5px;
+
+    padding:0 5px 0 5px;
+}
+
+main #sendButton {
+    margin: 10px;
+    width: 60px;
+    text-align: center;
+    vertical-align: center;
+    padding-top: 5px;
+    background-color: #512DA8; /* #f44336 */
+    color: black;
+    user-select: none;
+    border: 0 solid #39374c; /* #f44336 */
+    border-radius: 3px;
+    color: white;
+}
+main #sendButton:hover {
+    cursor: default;
+    background-color: #311B92 ; /* #e53935 */
+}
+main #sendButton:active {
+    background-color: #26204f; /* #b71c1c */
+}

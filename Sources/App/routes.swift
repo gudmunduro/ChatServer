@@ -2,9 +2,10 @@ import Vapor
 
 /// Register your application's routes here.
 public func routes(_ router: Router, _ wssRouter: NIOWebSocketServer) throws {
-    router.get { req in
-        return "Main site"
-    }
+
+    let uiController = UIController()
+
+    router.get(use: uiController.index)
 
     let userController = UserController()
 

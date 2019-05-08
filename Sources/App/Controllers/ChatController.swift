@@ -2,6 +2,8 @@ import Vapor
 
 final class ChatController {
 
+    let chatRoom = ChatRoom()
+
     func test(_ ws: WebSocket, _ req: Request) {
         ws.onText { ws, text in
             ws.send(text.reversed())
@@ -16,7 +18,8 @@ final class ChatController {
         
         let db = try req.mongoDB()
         try req.requireAuthenticated(db, customToken: token).whenSuccess { user in            
-            _ = ChatHandler(ws: ws, user: user, db: db)
+            // _ = ChatHandler(ws: ws, user: user, db: db)
+            self.chatRoom.addUser(ws: ws, user: user, db: db)
         }
     }
 
