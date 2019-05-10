@@ -26,7 +26,7 @@ final class UserController {
         return try UserManager.login(db: db, username: authHeader.username, password: authHeader.password)
     }
 
-    func testLogin(_ req: Request) throws -> Future<UserPublic> {
+    func isLoggedIn(_ req: Request) throws -> Future<UserPublic> {
         let db = try req.mongoDB()
         
         return try req.requireAuthenticated(db).map { user -> UserPublic in

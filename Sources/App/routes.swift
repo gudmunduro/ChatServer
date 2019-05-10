@@ -11,7 +11,7 @@ public func routes(_ router: Router, _ wssRouter: NIOWebSocketServer) throws {
 
     router.post("user", "create", use: userController.create)
     router.get("user", "login", use: userController.login)
-    router.get("user", "test", use: userController.testLogin)
+    router.get("user", "test", use: userController.isLoggedIn)
     router.get("user", "all", use: userController.allUsers)
 
     let chatController = ChatController()

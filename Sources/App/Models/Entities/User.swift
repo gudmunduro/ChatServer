@@ -26,6 +26,9 @@ extension User {
 
 }
 
+
+// MARK: Public user data
+
 struct UserPublic: Content {
     let _id: ObjectId
     let username: String

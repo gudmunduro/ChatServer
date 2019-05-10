@@ -42,9 +42,7 @@ class User {
 class Chat {
 
     constructor() {
-        console.log("1")
         this.socket = new WebSocket("ws://localhost:8080/connect/?token=" + User.token);
-        console.log("2")
         this.socket.onopen = this.onOpen.bind(this);
         this.socket.onmessage = this.onMessage.bind(this);
         this.socket.onclose = this.onClose.bind(this);
@@ -56,14 +54,14 @@ class Chat {
         const messageElement = document.createElement("b");
         const senderElement = document.createElement("span");
         const messageContentElement = document.createElement("i");
-        const brEl = document.createElement("br");
+        const breakElement = document.createElement("br");
 
         senderElement.innerText = sender;
         messageContentElement.innerText = text;
 
         messageElement.appendChild(senderElement);
         messageElement.appendChild(messageContentElement);
-        messageElement.appendChild(brEl);
+        messageElement.appendChild(breakElement);
         document.getElementById("messageBox").appendChild(messageElement);
     }
 

@@ -17,8 +17,7 @@ final class ChatController {
         }
         
         let db = try req.mongoDB()
-        try req.requireAuthenticated(db, customToken: token).whenSuccess { user in            
-            // _ = ChatHandler(ws: ws, user: user, db: db)
+        try req.requireAuthenticated(db, customToken: token).whenSuccess { user in
             self.chatRoom.addUser(ws: ws, user: user, db: db)
         }
     }
